@@ -16,11 +16,11 @@ return require('packer').startup(function(use)
   use({
 	'folke/tokyonight.nvim',
 	as = 'tokyonight',
-	config = function() 
+	config = function()
 		vim.cmd('colorscheme tokyonight-moon')
 	end
-  }) 
-	
+  })
+
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   use('nvim-treesitter/playground')
   use {
@@ -55,6 +55,45 @@ return require('packer').startup(function(use)
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    }
+
+    use {
+        'kdheepak/tabline.nvim',
+        config = function()
+            require'tabline'.setup {
+                -- Defaults configuration options
+                enable = true,
+                options = {
+                    -- If lualine is installed tabline will use separators configured in lualine by default.
+                    -- These options can be used to override those settings.
+                    section_separators = {'', ''},
+                    component_separators = {'', ''},
+                    max_bufferline_percent = 66, -- set to nil by default, and it uses vim.o.columns * 2/3
+                    show_tabs_always = false, -- this shows tabs only when there are more than one tab or if the first tab is named
+                    show_devicons = true, -- this shows devicons in buffer section
+                    show_bufnr = false, -- this appends [bufnr] to buffer section,
+                    show_filename_only = false, -- shows base filename only instead of relative path in filename
+                    modified_icon = "+ ", -- change the default modified icon
+                    modified_italic = false, -- set to true by default; this determines whether the filename turns italic if modified
+                    show_tabs_only = false, -- this shows only tabs instead of tabs + buffers
+                }
+            }
+            vim.cmd[[
+            set guioptions-=e " Use showtabline in gui vim
+            set sessionoptions+=tabpages,globals " store tabpages and globals in session
+            ]]
+        end,
+        requires = { { 'hoob3rt/lualine.nvim', opt=true }, {'kyazdani42/nvim-web-devicons', opt = true} }
+    }
+
+    use {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' 
+    }
+
+    use {
+	    "windwp/nvim-autopairs",
+        config = function() require("nvim-autopairs").setup({enable_check_bracket_line = false}) end
     }
 
 end)
