@@ -26,13 +26,15 @@ return require('packer').startup(function(use)
 	requires = { {'nvim-lua/plenary.nvim'} }
   }
 
-  use({
-	'folke/tokyonight.nvim',
-	as = 'tokyonight',
-	config = function()
-		vim.cmd('colorscheme tokyonight-moon')
-	end
-  })
+  -- use({
+	-- 'folke/tokyonight.nvim',
+	-- as = 'tokyonight',
+	-- config = function()
+		-- vim.cmd('colorscheme tokyonight-moon')
+	-- end
+  -- })
+
+  use { "rebelot/kanagawa.nvim", as = "kanagawa", config = function() vim.cmd('colorscheme kanagawa') end }
 
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   use('nvim-treesitter/playground')
