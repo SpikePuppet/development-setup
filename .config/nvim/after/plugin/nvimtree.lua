@@ -8,6 +8,10 @@ require("nvim-tree").setup({
     group_empty = true,
   },
   filters = {
+    git_ignored = true,
     dotfiles = true,
   },
 })
+
+vim.keymap.set("n", "<C-b>", ":NvimTreeToggle<CR>")
+vim.keymap.set("n", "<C-f>", ":NvimTreeFocus<CR>")

@@ -1,5 +1,18 @@
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
+
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 
@@ -57,6 +70,7 @@ return require('packer').startup(function(use)
         requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     }
 
+    -- Should move this into it's own file at some point
     use {
         'kdheepak/tabline.nvim',
         config = function()
@@ -68,11 +82,10 @@ return require('packer').startup(function(use)
                     -- These options can be used to override those settings.
                     section_separators = {'', ''},
                     component_separators = {'', ''},
-                    max_bufferline_percent = 66, -- set to nil by default, and it uses vim.o.columns * 2/3
                     show_tabs_always = false, -- this shows tabs only when there are more than one tab or if the first tab is named
                     show_devicons = true, -- this shows devicons in buffer section
-                    show_bufnr = false, -- this appends [bufnr] to buffer section,
-                    show_filename_only = false, -- shows base filename only instead of relative path in filename
+                    show_bufnr = true, -- this appends [bufnr] to buffer section,
+                    show_filename_only = true, -- shows base filename only instead of relative path in filename
                     modified_icon = "+ ", -- change the default modified icon
                     modified_italic = false, -- set to true by default; this determines whether the filename turns italic if modified
                     show_tabs_only = false, -- this shows only tabs instead of tabs + buffers
@@ -96,6 +109,13 @@ return require('packer').startup(function(use)
         config = function() require("nvim-autopairs").setup({enable_check_bracket_line = false}) end
     }
 
+    use {'tpope/vim-commentary', as='vim-commentary'}
+    use "lukas-reineke/indent-blankline.nvim"
+    use 'jose-elias-alvarez/null-ls.nvim'
+
+    if packer_bootstrap then
+        require('packer').sync()
+    end
 end)
 
 
