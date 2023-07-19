@@ -34,7 +34,11 @@ return require('packer').startup(function(use)
 	-- end
   -- })
 
-  use { "rebelot/kanagawa.nvim", as = "kanagawa", config = function() vim.cmd('colorscheme kanagawa') end }
+  -- use { "rebelot/kanagawa.nvim", as = "kanagawa", config = function() vim.cmd('colorscheme kanagawa') end }
+  use { "catppuccin/nvim", as = "catppuccin", config = function ()
+      vim.cmd('colorscheme catppuccin-frappe')
+  end }
+
 
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   use('nvim-treesitter/playground')
@@ -114,6 +118,7 @@ return require('packer').startup(function(use)
     use {'tpope/vim-commentary', as='vim-commentary'}
     use "lukas-reineke/indent-blankline.nvim"
     use 'jose-elias-alvarez/null-ls.nvim'
+    use 'nvim-pack/nvim-spectre'
 
     if packer_bootstrap then
         require('packer').sync()
