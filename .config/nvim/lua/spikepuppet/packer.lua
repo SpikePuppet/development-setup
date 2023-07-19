@@ -131,6 +131,7 @@ return require('packer').startup(function(use)
         }
       end
     }
+    use {'rrethy/vim-illuminate'}
 
     if packer_bootstrap then
         require('packer').sync()
