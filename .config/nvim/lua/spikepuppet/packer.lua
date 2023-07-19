@@ -132,7 +132,7 @@ return require('packer').startup(function(use)
       end
     }
     use {'rrethy/vim-illuminate'}
-
+    use {'folke/todo-comments.nvim'}
     if packer_bootstrap then
         require('packer').sync()
     end
