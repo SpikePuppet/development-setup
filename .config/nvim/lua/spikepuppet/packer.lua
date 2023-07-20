@@ -29,6 +29,7 @@ return require('packer').startup(function(use)
       "MunifTanjim/nui.nvim",
     }
   }
+  use {'github/copilot.vim', as='copilot'}
 
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   use('nvim-treesitter/playground')
@@ -69,7 +70,6 @@ return require('packer').startup(function(use)
 	  }
   	}
 
-    use {'github/copilot.vim', as='copilot'}
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'nvim-tree/nvim-web-devicons', opt = true }

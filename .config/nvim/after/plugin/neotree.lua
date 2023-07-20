@@ -3,3 +3,7 @@
     popup_border_style = "rounded",
     enable_git_status = true,
 })
+
+vim.keymap.set("n", "<leader>nt", function ()
+    vim.cmd("Neotree toggle")
+end)
