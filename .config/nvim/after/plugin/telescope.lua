@@ -11,3 +11,12 @@ vim.keymap.set('n', '<leader>fgf', builtin.git_files, {})
 vim.keymap.set('n', '<leader>ps', function()
 	builtin.grep_string({ search = vim.fn.input("Grep > ") });
 end)
+
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>b",
+  ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
+  { noremap = true }
+)
+
+require('telescope').load_extension "file_browser"

@@ -20,15 +20,6 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  use {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    requires = { 
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-    }
-  }
   use {'github/copilot.vim', as='copilot'}
 
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
@@ -44,10 +35,16 @@ return require('packer').startup(function(use)
 	requires = { {'nvim-lua/plenary.nvim'} }
   }
 
+  use {
+    "nvim-telescope/telescope-file-browser.nvim",
+    requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+  }
+
+  use { 'lewis6991/gitsigns.nvim'}
+
   use { "catppuccin/nvim", as = "catppuccin", config = function ()
       vim.cmd('colorscheme catppuccin-frappe')
   end }
-
 
   use {
 	  'VonHeikemen/lsp-zero.nvim',
