@@ -1,0 +1,8 @@
+[
+  {
+    "content": "Workspace",
+    "bindings": {
+      "cmd-shift-x": "workspace::NewCenterTerminal"
+    }
+  }
+]
